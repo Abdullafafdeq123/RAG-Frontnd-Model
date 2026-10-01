@@ -10,9 +10,25 @@ A lightweight React + Vite frontend for the existing FastAPI RAG chatbot.
    copy .env.example .env
 3. Update the backend URL if needed.
 
+## Deploying to Vercel
+
+Because the Vite dev proxy only works in local development, production deployments must use an absolute backend URL.
+
+Set this environment variable in your Vercel project settings:
+
+- `VITE_API_BASE_URL=https://your-fastapi-backend-url`
+
+Example:
+
+- `https://technova-api.onrender.com`
+- `https://your-app.up.railway.app`
+- `https://your-domain.com`
+
+Do not leave `VITE_API_BASE_URL` empty. If it is empty, the frontend will show a clear configuration error instead of silently sending requests to `/api` on the frontend domain.
+
 ## Environment variables
 
-- `VITE_API_BASE_URL`: backend base URL for the FastAPI app. The default is `http://127.0.0.1:8000`.
+- `VITE_API_BASE_URL`: backend base URL for the FastAPI app.
 - `VITE_API_TIMEOUT_MS`: request timeout in milliseconds. Default is `30000`.
 
 ## Run locally

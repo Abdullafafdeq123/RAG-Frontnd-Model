@@ -1,8 +1,15 @@
 const DEFAULT_TIMEOUT_MS = Number(import.meta.env.VITE_API_TIMEOUT_MS || 30000)
 
 const normalizeBaseUrl = () => {
-  const value = (import.meta.env.VITE_API_BASE_URL || '/api').trim()
-  return value || '/api'
+  const value = (import.meta.env.VITE_API_BASE_URL || '').trim()
+
+  if (!value) {
+    throw new Error(
+      'VITE_API_BASE_URL is not configured. Set it to your FastAPI backend URL in Vercel or local .env, e.g. https://your-api.example.com',
+    )
+  }
+
+  return value.replace(/\/$/, '')
 }
 
 const readErrorText = async (response) => {
